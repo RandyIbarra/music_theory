@@ -1,8 +1,5 @@
-/// Support for doing something awesome.
-///
-/// More dartdocs go here.
 library music_theory;
 
-export 'src/music_theory_base.dart';
-
-// TODO: Export any libraries intended for clients of this package.
+export 'src/note.dart';
+export 'src/scale.dart';
+export 'src/chord.dart';
