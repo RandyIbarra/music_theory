@@ -66,6 +66,6 @@ class Note {
 
   /// Compares current note with other. Missing to overload == operator.
   bool isEqualTo(Note note) {
-    return name == note.name;
+    return name == note.name || position == note.position;
   }
 }
