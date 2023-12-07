@@ -35,7 +35,7 @@ class Note {
   /// Note name
   String name;
 
-  /// Position in the [allNotes] array.
+  /// Position in the [allNotes]/[allNotesFlat] array.
   int position;
 
   Note.internal(this.name, this.position);
@@ -43,6 +43,8 @@ class Note {
   factory Note(String name) {
     if (allNotes.contains(name)) {
       return Note.internal(name, allNotes.indexOf(name));
+    } else if (allNotesFlat.contains(name)) {
+      return Note.internal(name, allNotesFlat.indexOf(name));
     } else {
       throw 'Error: Note does not exist';
     }
