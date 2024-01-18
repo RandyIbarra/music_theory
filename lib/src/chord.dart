@@ -4,6 +4,7 @@ import 'note.dart';
 List<String> chordModes = [
   'major',
   'minor',
+  'Maj7',
 ];
 
 /// Dart implementation of a chord.
@@ -23,6 +24,15 @@ class Chord {
     List<Note> notes = [key];
     notes.add(key + 4);
     notes.add(key + 7);
+    return Chord(key, notes);
+  }
+
+  /// Major chords constructor from key note.
+  factory Chord.getMajor7(Note key) {
+    List<Note> notes = [key];
+    notes.add(key + 4);
+    notes.add(key + 7);
+    notes.add(key + 11);
     return Chord(key, notes);
   }
 
@@ -56,4 +66,5 @@ class Chord {
 Map<String, Chord Function(Note)> chordRegistry = {
   "major": (note) => Chord.getMajor(note),
   "minor": (note) => Chord.getMinor(note),
+  "major7": (note) => Chord.getMajor7(note),
 };
