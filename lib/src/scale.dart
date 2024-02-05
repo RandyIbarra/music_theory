@@ -1,16 +1,6 @@
-import 'note.dart';
+import 'package:music_theory/src/mode.dart';
 
-/// Modes of a scale.
-List<String> scaleModes = [
-  'major',
-  'dorian',
-  'phrygian',
-  'lydian',
-  'mixolydean',
-  'minor',
-  'locrian',
-  'chromatic',
-];
+import 'note.dart';
 
 /// Simple dart implementation of a music scale objet.
 /// A [Scale] consists of a key [Note] and a code wich is used to build the set
@@ -95,6 +85,34 @@ class Scale {
     return false;
   }
 
+  bool isFlatInThisScale(Note queryNote) {
+    if (!hasNote(queryNote)) {
+      //throw 'This Scale does not have ${queryNote.name}';
+      return false;
+    }
+    for (Note note in notes) {
+      if (note.isEqualTo(queryNote) && note.isFlat()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  bool isSharpInThisScale(Note queryNote) {
+    if (!hasNote(queryNote)) {
+      //throw 'This Scale does not have ${queryNote.name}';
+      return false;
+    }
+    for (Note note in notes) {
+      if (note.isEqualTo(queryNote) && note.isSharp()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   bool isKey(Note note) {
     return notes[0].isEqualTo(note);
   }
@@ -102,13 +120,13 @@ class Scale {
 
 /// You can get the constructor by var _constructor = scaleRegistry['major'].
 /// And then, make your major scale by var _scale = _constructor(Note('C')).
-Map<String, Scale Function(Note)> scaleRegistry = {
-  "major": (note) => Scale.getMajor(note),
-  "dorian": (note) => Scale.getDorian(note),
-  "phrygian": (note) => Scale.getPhrygian(note),
-  "lydian": (note) => Scale.getLydian(note),
-  "mixolydean": (note) => Scale.getMixolydian(note),
-  "minor": (note) => Scale.getMinor(note),
-  "locrian": (note) => Scale.getLocrian(note),
-  "chromatic": (note) => Scale.getChromatic(note),
+Map<Mode, Scale Function(Note)> scaleRegistry = {
+  Mode.major: (note) => Scale.getMajor(note),
+  Mode.dorian: (note) => Scale.getDorian(note),
+  Mode.phrygian: (note) => Scale.getPhrygian(note),
+  Mode.lydian: (note) => Scale.getLydian(note),
+  Mode.mixolydian: (note) => Scale.getMixolydian(note),
+  Mode.minor: (note) => Scale.getMinor(note),
+  Mode.locrian: (note) => Scale.getLocrian(note),
+  Mode.chromatic: (note) => Scale.getChromatic(note),
 };
