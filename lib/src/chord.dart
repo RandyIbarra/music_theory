@@ -1,11 +1,6 @@
-import 'note.dart';
+import 'package:music_theory/src/mode.dart';
 
-/// Modes of a chord.
-List<String> chordModes = [
-  'major',
-  'minor',
-  'Maj7',
-];
+import 'note.dart';
 
 /// Dart implementation of a chord.
 /// A [Chord] consists of 3 [Note]'s (1st, 3rd, 5th) or 4 [Note]'s
@@ -63,8 +58,8 @@ class Chord {
 
 /// You can get the constructor by var _constructor = chordRegistry['major'].
 /// And then, make your major chord by var _chord = _constructor(Note('C')).
-Map<String, Chord Function(Note)> chordRegistry = {
-  "major": (note) => Chord.getMajor(note),
-  "minor": (note) => Chord.getMinor(note),
-  "major7": (note) => Chord.getMajor7(note),
+Map<Mode, Chord Function(Note)> chordRegistry = {
+  Mode.major: (note) => Chord.getMajor(note),
+  Mode.minor: (note) => Chord.getMinor(note),
+  Mode.majorSeventh: (note) => Chord.getMajor7(note),
 };
