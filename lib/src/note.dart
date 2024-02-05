@@ -45,6 +45,19 @@ class Note {
   bool isSharp() => name.contains('#') || allNotes[position].contains('#');
   bool isFlat() => name.contains('b') || allNotesFlat[position].contains('b');
 
+  void toSharp() {
+    position++;
+    position %= allNotes.length;
+    name = allNotes[position];
+  }
+
+  void toFlat() {
+    position--;
+    position += allNotes.length; // negative case
+    position %= allNotes.length;
+    name = allNotesFlat[position];
+  }
+
   void addSemitones(int semitones) {
     position = (position + semitones + allNotes.length) % allNotes.length;
     name = allNotes[position];
