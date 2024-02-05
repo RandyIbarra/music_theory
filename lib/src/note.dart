@@ -8,7 +8,10 @@ class Note {
   /// Position in the [allNotes]/[allNotesFlat] array.
   int position;
 
-  Note.internal(this.name, this.position);
+  Note.internal(
+    this.name,
+    this.position,
+  );
 
   factory Note(String name) {
     if (allNotes.contains(name)) {
@@ -38,4 +41,7 @@ class Note {
   bool isEqualTo(Note note) {
     return name == note.name || position == note.position;
   }
+
+  bool isSharp() => name.contains('#') || allNotes[position].contains('#');
+  bool isFlat() => name.contains('b') || allNotesFlat[position].contains('b');
 }
