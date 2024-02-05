@@ -44,4 +44,14 @@ class Note {
 
   bool isSharp() => name.contains('#') || allNotes[position].contains('#');
   bool isFlat() => name.contains('b') || allNotesFlat[position].contains('b');
+
+  void addSemitones(int semitones) {
+    position = (position + semitones + allNotes.length) % allNotes.length;
+    name = allNotes[position];
+  }
+
+  void removeSemitones(int semitones) {
+    position = (position - semitones + allNotes.length) % allNotes.length;
+    name = allNotesFlat[position];
+  }
 }
