@@ -8,5 +8,4 @@ enum Mode {
   locrian,
   //
   chromatic,
-  majorSeventh,
 }

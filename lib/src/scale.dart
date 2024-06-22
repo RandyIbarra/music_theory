@@ -1,4 +1,5 @@
 import 'package:music_theory/src/mode.dart';
+import 'package:music_theory/src/note_names.dart';
 
 import 'note.dart';
 
@@ -21,6 +22,13 @@ class Scale {
     Note note = key;
     for (int semitones in code) {
       note = note + semitones;
+      // check if note was added
+      for (int i = 0; i < notes.length; i++) {
+        if (notes[i].name[0] == note.name[0]) {
+          note.name = allNotesFlat[note.position];
+          break;
+        }
+      }
       notes.add(note);
     }
     if (notes.first == notes.last) {
@@ -66,11 +74,11 @@ class Scale {
 
   /// Chromatic scale constructor from key note.
   factory Scale.getChromatic(Note key) {
-    return Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+    return Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
   }
 
   /// Scale constructor from key [Note] and a mode.
-  factory Scale.getScaleFromMode(Note key, String mode) {
+  factory Scale.getScaleFromMode(Note key, Mode mode) {
     final constructor = scaleRegistry[mode];
     final scale = constructor!(key);
     return scale;
@@ -115,6 +123,29 @@ class Scale {
 
   bool isKey(Note note) {
     return notes[0].isEqualTo(note);
+  }
+
+  factory Scale.fromMode(Note note, Mode mode) {
+    switch (mode) {
+      case Mode.major:
+        return Scale.getMajor(note);
+      case Mode.dorian:
+        return Scale.getDorian(note);
+      case Mode.phrygian:
+        return Scale.getPhrygian(note);
+      case Mode.lydian:
+        return Scale.getLydian(note);
+      case Mode.mixolydian:
+        return Scale.getMixolydian(note);
+      case Mode.minor:
+        return Scale.getMinor(note);
+      case Mode.locrian:
+        return Scale.getLocrian(note);
+      case Mode.chromatic:
+        return Scale.getChromatic(note);
+      default:
+        return Scale.getMajor(note);
+    }
   }
 }
 

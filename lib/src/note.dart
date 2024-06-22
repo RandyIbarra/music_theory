@@ -13,6 +13,17 @@ class Note {
     this.position,
   );
 
+  factory Note.fromNoteName(NoteName noteName) {
+    String name = getNoteFromNoteName(noteName);
+    if (allNotes.contains(name)) {
+      return Note.internal(name, allNotes.indexOf(name));
+    } else if (allNotesFlat.contains(name)) {
+      return Note.internal(name, allNotesFlat.indexOf(name));
+    } else {
+      throw 'Error: Note does not exist';
+    }
+  }
+
   factory Note(String name) {
     if (allNotes.contains(name)) {
       return Note.internal(name, allNotes.indexOf(name));
