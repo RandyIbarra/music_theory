@@ -1,4 +1,4 @@
-enum Mode {
+enum ScaleMode {
   major,
   dorian,
   phrygian,

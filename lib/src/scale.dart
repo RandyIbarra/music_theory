@@ -78,7 +78,7 @@ class Scale {
   }
 
   /// Scale constructor from key [Note] and a mode.
-  factory Scale.getScaleFromMode(Note key, Mode mode) {
+  factory Scale.getScaleFromMode(Note key, ScaleMode mode) {
     final constructor = scaleRegistry[mode];
     final scale = constructor!(key);
     return scale;
@@ -125,23 +125,23 @@ class Scale {
     return notes[0].isEqualTo(note);
   }
 
-  factory Scale.fromMode(Note note, Mode mode) {
+  factory Scale.fromMode(Note note, ScaleMode mode) {
     switch (mode) {
-      case Mode.major:
+      case ScaleMode.major:
         return Scale.getMajor(note);
-      case Mode.dorian:
+      case ScaleMode.dorian:
         return Scale.getDorian(note);
-      case Mode.phrygian:
+      case ScaleMode.phrygian:
         return Scale.getPhrygian(note);
-      case Mode.lydian:
+      case ScaleMode.lydian:
         return Scale.getLydian(note);
-      case Mode.mixolydian:
+      case ScaleMode.mixolydian:
         return Scale.getMixolydian(note);
-      case Mode.minor:
+      case ScaleMode.minor:
         return Scale.getMinor(note);
-      case Mode.locrian:
+      case ScaleMode.locrian:
         return Scale.getLocrian(note);
-      case Mode.chromatic:
+      case ScaleMode.chromatic:
         return Scale.getChromatic(note);
       default:
         return Scale.getMajor(note);
@@ -151,13 +151,13 @@ class Scale {
 
 /// You can get the constructor by var _constructor = scaleRegistry['major'].
 /// And then, make your major scale by var _scale = _constructor(Note('C')).
-Map<Mode, Scale Function(Note)> scaleRegistry = {
-  Mode.major: (note) => Scale.getMajor(note),
-  Mode.dorian: (note) => Scale.getDorian(note),
-  Mode.phrygian: (note) => Scale.getPhrygian(note),
-  Mode.lydian: (note) => Scale.getLydian(note),
-  Mode.mixolydian: (note) => Scale.getMixolydian(note),
-  Mode.minor: (note) => Scale.getMinor(note),
-  Mode.locrian: (note) => Scale.getLocrian(note),
-  Mode.chromatic: (note) => Scale.getChromatic(note),
+Map<ScaleMode, Scale Function(Note)> scaleRegistry = {
+  ScaleMode.major: (note) => Scale.getMajor(note),
+  ScaleMode.dorian: (note) => Scale.getDorian(note),
+  ScaleMode.phrygian: (note) => Scale.getPhrygian(note),
+  ScaleMode.lydian: (note) => Scale.getLydian(note),
+  ScaleMode.mixolydian: (note) => Scale.getMixolydian(note),
+  ScaleMode.minor: (note) => Scale.getMinor(note),
+  ScaleMode.locrian: (note) => Scale.getLocrian(note),
+  ScaleMode.chromatic: (note) => Scale.getChromatic(note),
 };
