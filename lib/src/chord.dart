@@ -1,5 +1,3 @@
-import 'package:music_theory/src/mode.dart';
-
 import 'note.dart';
 
 /// Dart implementation of a chord.
