@@ -37,18 +37,3 @@ const root = Note('C');
 ## Additional information
 
 There is no additional information yet.
-
----
-
-## Comments
-
-- Comment 1
-- Comment 2
-- Comment 3
-
-## Examples
-
-- Example 1
-- Example 2
-- Example 3
-- Example 4
