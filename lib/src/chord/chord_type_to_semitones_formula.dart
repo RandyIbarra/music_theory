@@ -1,4 +1,4 @@
-import 'package:music_theory/src/chord/chord_type.dart';
+import 'package:music_theory/src/enums/chord_type.dart';
 
 const chordTypeToSemitonesFormula = <ChordType, List<int>>{
   ChordType.major: [0, 4, 7], // 1, 3, 5

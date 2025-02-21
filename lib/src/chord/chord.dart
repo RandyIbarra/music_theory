@@ -1,6 +1,6 @@
 import 'package:music_theory/src/chord/chord_registry.dart';
-import 'package:music_theory/src/chord/chord_type.dart';
-import 'package:music_theory/src/chord/semitone_formula_to_chord_type.dart';
+import 'package:music_theory/src/enums/chord_type.dart';
+import 'package:music_theory/src/functions/semitone_formula_to_chord_type.dart';
 
 import '../note.dart';
 

@@ -1,4 +1,4 @@
-import 'package:music_theory/src/chord/chord_type.dart';
+import 'package:music_theory/src/enums/chord_type.dart';
 
 /// TODO: Implement semitoneListToChordType
 ChordType semitoneFormulaToChordType(List<int> semitonesList) =>

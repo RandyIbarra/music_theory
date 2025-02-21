@@ -1,5 +1,5 @@
 import 'package:music_theory/music_theory.dart';
-import 'package:music_theory/src/chord/chord_type.dart';
+import 'package:music_theory/src/enums/chord_type.dart';
 import 'package:music_theory/src/chord/chord_type_to_semitones_formula.dart';
 
 /// You can get the constructor by var _constructor = chordRegistry['major'].
