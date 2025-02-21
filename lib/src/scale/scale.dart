@@ -1,6 +1,5 @@
 import 'package:music_theory/src/enums/scale_type.dart';
 import 'package:music_theory/src/functions/semitone_formula_to_scale_type.dart';
-import 'package:music_theory/src/mode.dart';
 import 'package:music_theory/src/note_names.dart';
 import 'package:music_theory/src/scale/scale_registry.dart';
 
@@ -135,9 +134,9 @@ class Scale {
           useFlat: useFlat);
 
   /// Scale constructor from key [Note] and a mode.
-  factory Scale.getScaleFromMode(
+  factory Scale.getScaleFromType(
     Note key,
-    ScaleMode mode, {
+    ScaleType type, {
     bool useFlat = false,
   }) {
     late Scale Function(Note) constructor;
@@ -145,12 +144,12 @@ class Scale {
     /// Try to get the constructor from the registry.
     try {
       if (useFlat) {
-        constructor = scaleRegistryFlat[mode]!;
+        constructor = scaleRegistryFlat[type]!;
       } else {
-        constructor = scaleRegistry[mode]!;
+        constructor = scaleRegistry[type]!;
       }
     } catch (e) {
-      throw 'Mode $mode not found';
+      throw 'Type $type not found';
     }
 
     final scale = constructor(key);
@@ -200,8 +199,8 @@ class Scale {
 
   factory Scale.fromMode({
     required Note note,
-    required ScaleMode mode,
+    required ScaleType type,
     bool useFlat = false,
   }) =>
-      Scale.getScaleFromMode(note, mode, useFlat: useFlat);
+      Scale.getScaleFromType(note, type, useFlat: useFlat);
 }
