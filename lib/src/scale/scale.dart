@@ -1,5 +1,6 @@
 import 'package:music_theory/src/mode.dart';
 import 'package:music_theory/src/note_names.dart';
+import 'package:music_theory/src/scale/scale_registry.dart';
 
 import '../note.dart';
 
@@ -153,27 +154,3 @@ class Scale {
   }) =>
       Scale.getScaleFromMode(note, mode, useFlat: useFlat);
 }
-
-/// You can get the constructor by var _constructor = scaleRegistry['major'].
-/// And then, make your major scale by var _scale = _constructor(Note('C')).
-Map<ScaleMode, Scale Function(Note)> scaleRegistry = {
-  ScaleMode.major: (note) => Scale.getMajor(note),
-  ScaleMode.dorian: (note) => Scale.getDorian(note),
-  ScaleMode.phrygian: (note) => Scale.getPhrygian(note),
-  ScaleMode.lydian: (note) => Scale.getLydian(note),
-  ScaleMode.mixolydian: (note) => Scale.getMixolydian(note),
-  ScaleMode.minor: (note) => Scale.getMinor(note),
-  ScaleMode.locrian: (note) => Scale.getLocrian(note),
-  ScaleMode.chromatic: (note) => Scale.getChromatic(note),
-};
-
-Map<ScaleMode, Scale Function(Note)> scaleRegistryFlat = {
-  ScaleMode.major: (note) => Scale.getMajor(note, useFlat: true),
-  ScaleMode.dorian: (note) => Scale.getDorian(note, useFlat: true),
-  ScaleMode.phrygian: (note) => Scale.getPhrygian(note, useFlat: true),
-  ScaleMode.lydian: (note) => Scale.getLydian(note, useFlat: true),
-  ScaleMode.mixolydian: (note) => Scale.getMixolydian(note, useFlat: true),
-  ScaleMode.minor: (note) => Scale.getMinor(note, useFlat: true),
-  ScaleMode.locrian: (note) => Scale.getLocrian(note, useFlat: true),
-  ScaleMode.chromatic: (note) => Scale.getChromatic(note, useFlat: true),
-};
