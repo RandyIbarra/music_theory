@@ -1,7 +1,7 @@
 import 'package:music_theory/src/mode.dart';
 import 'package:music_theory/src/note_names.dart';
 
-import 'note.dart';
+import '../note.dart';
 
 /// Simple dart implementation of a music scale objet.
 /// A [Scale] consists of a key [Note] and a code wich is used to build the set
