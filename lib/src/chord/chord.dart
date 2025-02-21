@@ -2,7 +2,7 @@ import 'package:music_theory/src/chord/chord_registry.dart';
 import 'package:music_theory/src/enums/chord_type.dart';
 import 'package:music_theory/src/functions/semitone_formula_to_chord_type.dart';
 
-import '../note.dart';
+import '../note/note.dart';
 
 /// Dart implementation of a chord.
 /// A [Chord] consists of 3 [Note]'s (1st, 3rd, 5th) or 4 [Note]'s

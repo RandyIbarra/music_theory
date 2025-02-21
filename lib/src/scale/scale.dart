@@ -1,9 +1,9 @@
 import 'package:music_theory/src/enums/scale_type.dart';
 import 'package:music_theory/src/functions/semitone_formula_to_scale_type.dart';
-import 'package:music_theory/src/note_names.dart';
+import 'package:music_theory/src/note/note_names.dart';
 import 'package:music_theory/src/scale/scale_registry.dart';
 
-import '../note.dart';
+import '../note/note.dart';
 
 /// Simple dart implementation of a music scale objet.
 /// A [Scale] consists of a key [Note] and a code wich is used to build the set
