@@ -11,14 +11,21 @@ and the Flutter guide for
 [developing packages and plugins](https://flutter.dev/developing-packages). 
 -->
 
+# Musical theory package
+
 Musical concepts as dart objects.
 
 ## Features
 
 List of objects:
+
 - Note
 - Chord
 - Scale
+
+List of enums:
+
+- ChordType 
 
 ## Getting started
 
@@ -32,6 +39,15 @@ Example of musical note
 
 ```dart
 const root = Note('C');
+```
+
+## Run example
+
+There are several examples of use in the `example` folder, and they can be run using
+```
+dart run example/note.dart
+dart run example/chord.dart
+dart run example/scale.dart
 ```
 
 ## Additional information
