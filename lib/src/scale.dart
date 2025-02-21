@@ -78,13 +78,30 @@ class Scale {
 
   /// Chromatic scale constructor from key note.
   factory Scale.getChromatic(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], useFlat: useFlat);
+    return Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+        useFlat: useFlat);
   }
 
   /// Scale constructor from key [Note] and a mode.
-  factory Scale.getScaleFromMode(Note key, ScaleMode mode, {bool useFlat = false}) {
-    final constructor = scaleRegistry[mode];
-    final scale = constructor!(key);
+  factory Scale.getScaleFromMode(
+    Note key,
+    ScaleMode mode, {
+    bool useFlat = false,
+  }) {
+    late Scale Function(Note) constructor;
+
+    /// Try to get the constructor from the registry.
+    try {
+      if (useFlat) {
+        constructor = scaleRegistryFlat[mode]!;
+      } else {
+        constructor = scaleRegistry[mode]!;
+      }
+    } catch (e) {
+      throw 'Mode $mode not found';
+    }
+
+    final scale = constructor(key);
     return scale;
   }
 
@@ -132,28 +149,9 @@ class Scale {
   factory Scale.fromMode({
     required Note note,
     required ScaleMode mode,
-  }) {
-    switch (mode) {
-      case ScaleMode.major:
-        return Scale.getMajor(note);
-      case ScaleMode.dorian:
-        return Scale.getDorian(note);
-      case ScaleMode.phrygian:
-        return Scale.getPhrygian(note);
-      case ScaleMode.lydian:
-        return Scale.getLydian(note);
-      case ScaleMode.mixolydian:
-        return Scale.getMixolydian(note);
-      case ScaleMode.minor:
-        return Scale.getMinor(note);
-      case ScaleMode.locrian:
-        return Scale.getLocrian(note);
-      case ScaleMode.chromatic:
-        return Scale.getChromatic(note);
-      default:
-        return Scale.getMajor(note);
-    }
-  }
+    bool useFlat = false,
+  }) =>
+      Scale.getScaleFromMode(note, mode, useFlat: useFlat);
 }
 
 /// You can get the constructor by var _constructor = scaleRegistry['major'].
