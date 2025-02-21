@@ -1,3 +1,5 @@
+import 'package:music_theory/src/enums/scale_type.dart';
+import 'package:music_theory/src/functions/semitone_formula_to_scale_type.dart';
 import 'package:music_theory/src/mode.dart';
 import 'package:music_theory/src/note_names.dart';
 import 'package:music_theory/src/scale/scale_registry.dart';
@@ -14,11 +16,19 @@ class Scale {
   /// Notes in scale
   List<Note> notes;
 
+  /// Scale type
+  ScaleType type;
+
   /// Internal constructor to use in factories.
-  Scale.internal(this.key, this.notes);
+  Scale.internal(this.key, this.notes, this.type);
 
   /// A scale consist of a key [Note] and a code.
-  factory Scale(Note key, List<int> code, {bool useFlat = false}) {
+  factory Scale(
+    Note key,
+    List<int> code, {
+    bool useFlat = false,
+    ScaleType? scaleType,
+  }) {
     List<Note> notes = [key];
     Note note = key;
     for (int semitones in code) {
@@ -39,49 +49,49 @@ class Scale {
     if (notes.first == notes.last) {
       notes.removeLast();
     }
-    return Scale.internal(key, notes);
+    return Scale.internal(
+        key, notes, scaleType ?? semitoneFormulaToScaleType(code));
   }
 
   /// Major scale constructor from key [Note].
-  factory Scale.getMajor(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[2, 2, 1, 2, 2, 2, 1], useFlat: useFlat);
-  }
+  factory Scale.getMajor(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[2, 2, 1, 2, 2, 2, 1],
+          scaleType: ScaleType.major, useFlat: useFlat);
 
   /// Dorian scale constructor from key [Note].
-  factory Scale.getDorian(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[2, 1, 2, 2, 2, 1, 2], useFlat: useFlat);
-  }
+  factory Scale.getDorian(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[2, 1, 2, 2, 2, 1, 2],
+          scaleType: ScaleType.dorian, useFlat: useFlat);
 
   /// Phrygian scale constructor from key [Note].
-  factory Scale.getPhrygian(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[1, 2, 2, 2, 1, 2, 2], useFlat: useFlat);
-  }
+  factory Scale.getPhrygian(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[1, 2, 2, 2, 1, 2, 2],
+          scaleType: ScaleType.phrygian, useFlat: useFlat);
 
   /// Lydian scale constructor from key [Note].
-  factory Scale.getLydian(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[2, 2, 2, 1, 2, 2, 1], useFlat: useFlat);
-  }
+  factory Scale.getLydian(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[2, 2, 2, 1, 2, 2, 1],
+          scaleType: ScaleType.lydian, useFlat: useFlat);
 
   /// Mixolydian scale constructor from key [Note].
-  factory Scale.getMixolydian(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[2, 2, 1, 2, 2, 1, 2], useFlat: useFlat);
-  }
+  factory Scale.getMixolydian(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[2, 2, 1, 2, 2, 1, 2],
+          scaleType: ScaleType.mixolydian, useFlat: useFlat);
 
   /// Minor scale constructor from key [Note].
-  factory Scale.getMinor(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[2, 1, 2, 2, 1, 2, 2], useFlat: useFlat);
-  }
+  factory Scale.getMinor(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[2, 1, 2, 2, 1, 2, 2],
+          scaleType: ScaleType.minor, useFlat: useFlat);
 
   /// Locrian scale constructor from key [Note].
-  factory Scale.getLocrian(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[1, 2, 2, 1, 2, 2, 2], useFlat: useFlat);
-  }
+  factory Scale.getLocrian(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[1, 2, 2, 1, 2, 2, 2],
+          scaleType: ScaleType.locrian, useFlat: useFlat);
 
   /// Chromatic scale constructor from key note.
-  factory Scale.getChromatic(Note key, {bool useFlat = false}) {
-    return Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        useFlat: useFlat);
-  }
+  factory Scale.getChromatic(Note key, {bool useFlat = false}) =>
+      Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+          scaleType: ScaleType.chromatic, useFlat: useFlat);
 
   /// Scale constructor from key [Note] and a mode.
   factory Scale.getScaleFromMode(
