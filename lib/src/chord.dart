@@ -15,6 +15,16 @@ class Chord {
 
   Chord(this.key, this.notes, this.type);
 
+  /// Chords constructor from key note and mode.
+  factory Chord.getChordFromMode(Note key, ChordType mode) {
+    /// Get the constructor from the registry.
+    final constructor = chordRegistry[mode];
+
+    /// Make the chord.
+    final chord = constructor!(key);
+    return chord;
+  }
+
   /// Major chords constructor from key note.
   factory Chord.getMajor(Note key) =>
       Chord(key, [key, key + 4, key + 7], ChordType.major);
@@ -26,16 +36,6 @@ class Chord {
   /// Minor chords constructor from key note.
   factory Chord.getMinor(Note key) =>
       Chord(key, [key, key + 3, key + 7], ChordType.minor);
-
-  /// Chords constructor from key note and mode.
-  factory Chord.getChordFromMode(Note key, ChordType mode) {
-    /// Get the constructor from the registry.
-    final constructor = chordRegistry[mode];
-
-    /// Make the chord.
-    final chord = constructor!(key);
-    return chord;
-  }
 
   factory Chord.getChordFromSemitonesFormula({
     required Note key,
