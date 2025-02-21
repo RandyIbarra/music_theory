@@ -27,7 +27,8 @@ class Chord {
   factory Chord.getMinor(Note key) =>
       Chord(key, [key, key + 3, key + 7], ChordType.minor);
 
-  factory Chord.getChordFromMode(Note key, ChordType mode, {int nNotes = 3}) {
+  /// Chords constructor from key note and mode.
+  factory Chord.getChordFromMode(Note key, ChordType mode) {
     /// Get the constructor from the registry.
     final constructor = chordRegistry[mode];
 
