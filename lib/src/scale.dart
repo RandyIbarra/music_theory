@@ -17,7 +17,7 @@ class Scale {
   Scale.internal(this.key, this.notes);
 
   /// A scale consist of a key [Note] and a code.
-  factory Scale(Note key, List<int> code) {
+  factory Scale(Note key, List<int> code, {bool useFlat = false}) {
     List<Note> notes = [key];
     Note note = key;
     for (int semitones in code) {
@@ -25,7 +25,11 @@ class Scale {
       // check if note was added
       for (int i = 0; i < notes.length; i++) {
         if (notes[i].name[0] == note.name[0]) {
-          note.name = allNotesFlat[note.position];
+          if (useFlat) {
+            note.name = allNotesFlat[note.position];
+          } else {
+            note.name = allNotes[note.position];
+          }
           break;
         }
       }
@@ -38,47 +42,47 @@ class Scale {
   }
 
   /// Major scale constructor from key [Note].
-  factory Scale.getMajor(Note key) {
-    return Scale(key, <int>[2, 2, 1, 2, 2, 2, 1]);
+  factory Scale.getMajor(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[2, 2, 1, 2, 2, 2, 1], useFlat: useFlat);
   }
 
   /// Dorian scale constructor from key [Note].
-  factory Scale.getDorian(Note key) {
-    return Scale(key, <int>[2, 1, 2, 2, 2, 1, 2]);
+  factory Scale.getDorian(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[2, 1, 2, 2, 2, 1, 2], useFlat: useFlat);
   }
 
   /// Phrygian scale constructor from key [Note].
-  factory Scale.getPhrygian(Note key) {
-    return Scale(key, <int>[1, 2, 2, 2, 1, 2, 2]);
+  factory Scale.getPhrygian(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[1, 2, 2, 2, 1, 2, 2], useFlat: useFlat);
   }
 
   /// Lydian scale constructor from key [Note].
-  factory Scale.getLydian(Note key) {
-    return Scale(key, <int>[2, 2, 2, 1, 2, 2, 1]);
+  factory Scale.getLydian(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[2, 2, 2, 1, 2, 2, 1], useFlat: useFlat);
   }
 
   /// Mixolydian scale constructor from key [Note].
-  factory Scale.getMixolydian(Note key) {
-    return Scale(key, <int>[2, 2, 1, 2, 2, 1, 2]);
+  factory Scale.getMixolydian(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[2, 2, 1, 2, 2, 1, 2], useFlat: useFlat);
   }
 
   /// Minor scale constructor from key [Note].
-  factory Scale.getMinor(Note key) {
-    return Scale(key, <int>[2, 1, 2, 2, 1, 2, 2]);
+  factory Scale.getMinor(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[2, 1, 2, 2, 1, 2, 2], useFlat: useFlat);
   }
 
   /// Locrian scale constructor from key [Note].
-  factory Scale.getLocrian(Note key) {
-    return Scale(key, <int>[1, 2, 2, 1, 2, 2, 2]);
+  factory Scale.getLocrian(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[1, 2, 2, 1, 2, 2, 2], useFlat: useFlat);
   }
 
   /// Chromatic scale constructor from key note.
-  factory Scale.getChromatic(Note key) {
-    return Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]);
+  factory Scale.getChromatic(Note key, {bool useFlat = false}) {
+    return Scale(key, <int>[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], useFlat: useFlat);
   }
 
   /// Scale constructor from key [Note] and a mode.
-  factory Scale.getScaleFromMode(Note key, ScaleMode mode) {
+  factory Scale.getScaleFromMode(Note key, ScaleMode mode, {bool useFlat = false}) {
     final constructor = scaleRegistry[mode];
     final scale = constructor!(key);
     return scale;
@@ -163,4 +167,15 @@ Map<ScaleMode, Scale Function(Note)> scaleRegistry = {
   ScaleMode.minor: (note) => Scale.getMinor(note),
   ScaleMode.locrian: (note) => Scale.getLocrian(note),
   ScaleMode.chromatic: (note) => Scale.getChromatic(note),
+};
+
+Map<ScaleMode, Scale Function(Note)> scaleRegistryFlat = {
+  ScaleMode.major: (note) => Scale.getMajor(note, useFlat: true),
+  ScaleMode.dorian: (note) => Scale.getDorian(note, useFlat: true),
+  ScaleMode.phrygian: (note) => Scale.getPhrygian(note, useFlat: true),
+  ScaleMode.lydian: (note) => Scale.getLydian(note, useFlat: true),
+  ScaleMode.mixolydian: (note) => Scale.getMixolydian(note, useFlat: true),
+  ScaleMode.minor: (note) => Scale.getMinor(note, useFlat: true),
+  ScaleMode.locrian: (note) => Scale.getLocrian(note, useFlat: true),
+  ScaleMode.chromatic: (note) => Scale.getChromatic(note, useFlat: true),
 };
