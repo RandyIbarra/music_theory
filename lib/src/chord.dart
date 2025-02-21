@@ -10,50 +10,45 @@ class Chord {
   /// Notes of chord.
   List<Note> notes;
 
-  Chord(this.key, this.notes);
+  /// Type of chord.
+  ChordType type;
+
+  Chord(this.key, this.notes, this.type);
 
   /// Major chords constructor from key note.
-  factory Chord.getMajor(Note key) {
-    List<Note> notes = [key];
-    notes.add(key + 4);
-    notes.add(key + 7);
-    return Chord(key, notes);
-  }
+  factory Chord.getMajor(Note key) =>
+      Chord(key, [key, key + 4, key + 7], ChordType.major);
 
   /// Major chords constructor from key note.
-  factory Chord.getMajor7(Note key) {
-    List<Note> notes = [key];
-    notes.add(key + 4);
-    notes.add(key + 7);
-    notes.add(key + 11);
-    return Chord(key, notes);
-  }
+  factory Chord.getMajor7(Note key) =>
+      Chord(key, [key, key + 4, key + 7, key + 11], ChordType.major7);
 
   /// Minor chords constructor from key note.
-  factory Chord.getMinor(Note key) {
-    List<Note> notes = [key];
-    notes.add(key + 3);
-    notes.add(key + 7);
-    return Chord(key, notes);
-  }
+  factory Chord.getMinor(Note key) =>
+      Chord(key, [key, key + 3, key + 7], ChordType.minor);
 
   factory Chord.getChordFromMode(Note key, ChordType mode, {int nNotes = 3}) {
-    print(mode.name);
+    /// Get the constructor from the registry.
     final constructor = chordRegistry[mode];
-    print(key.name);
+
+    /// Make the chord.
     final chord = constructor!(key);
     return chord;
   }
 
-  factory Chord.getChordFromSemitonesFormula(
-    Note key,
-    List<int> semitonesList,
-  ) {
-    return Chord(
-      key,
-      semitonesList.map((semitones) => key + semitones).toList(),
-    );
-  }
+  factory Chord.getChordFromSemitonesFormula({
+    required Note key,
+    required List<int> semitoneList,
+    required ChordType? chordType,
+  }) =>
+      Chord(
+          key,
+
+          /// Build the notes list from the semitones list.
+          semitoneList.map((semitones) => key + semitones).toList(),
+
+          /// Compute the chord type from the semitones list.
+          chordType ?? semitoneListToChordType(semitoneList));
 
   int hasNote(Note queryNote) {
     for (int index = 0; index < 3; index++) {
@@ -65,6 +60,9 @@ class Chord {
     return 0;
   }
 }
+
+/// TODO: Implement semitoneListToChordType
+ChordType semitoneListToChordType(List<int> semitonesList) => ChordType.major;
 
 enum ChordType {
   major,
@@ -101,13 +99,14 @@ const chordTypeToSemitonesFormula = <ChordType, List<int>>{
 Map<ChordType, Chord Function(Note)> chordRegistry = {
   for (ChordType chordType in ChordType.values)
     chordType: (note) => Chord.getChordFromSemitonesFormula(
-          note,
-          chordTypeToSemitonesFormula[chordType]!,
-        ),
+        key: note,
+        semitoneList: chordTypeToSemitonesFormula[chordType]!,
+        chordType: chordType),
   /* example
   ChordType.major: (note) => Chord.getChordFromSemitonesFormula(
-        note,
-        chordTypeToSemitonesFormula[ChordType.major]!,
+        key: note,
+        semitoneList: chordTypeToSemitonesFormula[ChordType.major]!,
+        chordType: chordType,
       ),
   */
 };
