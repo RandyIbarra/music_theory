@@ -37,7 +37,7 @@ class Chord {
   factory Chord.getChordFromSemitonesFormula({
     required Note key,
     required List<int> semitoneList,
-    required ChordType? chordType,
+    ChordType? chordType,
   }) =>
       Chord(
           key,
