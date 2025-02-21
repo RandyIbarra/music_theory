@@ -125,7 +125,10 @@ class Scale {
     return notes[0].isEqualTo(note);
   }
 
-  factory Scale.fromMode(Note note, ScaleMode mode) {
+  factory Scale.fromMode({
+    required Note note,
+    required ScaleMode mode,
+  }) {
     switch (mode) {
       case ScaleMode.major:
         return Scale.getMajor(note);
