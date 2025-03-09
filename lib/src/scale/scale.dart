@@ -59,7 +59,7 @@ class Scale {
       }
       notes.add(note);
     }
-    if (notes.first == notes.last) {
+    if (notes.first.name == notes.last.name) {
       notes.removeLast();
     }
     return Scale(key, notes, scaleType ?? semitoneFormulaToScaleType(code));
