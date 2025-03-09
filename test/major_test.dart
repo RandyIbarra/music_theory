@@ -1,39 +1,126 @@
 import 'package:music_theory/music_theory.dart';
-// external packages
 import 'package:test/test.dart';
 
 void main() {
-  group('Testing Note: ', () {
-    final note = Note('C');
-
-    setUp(() {
-      // Additional setup goes here.
-    });
-
-    test('Correct init name ${note.name}', () {
-      expect(note.name, 'C');
-    });
-
-    test('To sharp ${note.name}', () {
-      final naturalName = note.name[0];
-      final auxNote = Note(naturalName);
-      final sharp = auxNote + 1;
-      print(' sharp: ${sharp.name}');
-      expect(
-        sharp.isSharp(),
-        (naturalName == 'B' || naturalName == 'E') ? false : true,
+  const cMajorMessage =
+      'getChordFromMode creates correct major scale for (Note("C"), ScaleType.major)';
+  const dMajorMessage =
+      'getChordFromMode creates correct major scale for (Note("D"), ScaleType.major)';
+  const eMajorMessage =
+      'getChordFromMode creates correct major scale for (Note("E"), ScaleType.major)';
+  const fMajorMessage =
+      'getChordFromMode creates correct major scale for (Note("F"), ScaleType.major)';
+  const gMajorMessage =
+      'getChordFromMode creates correct major scale for (Note("G"), ScaleType.major)';
+  const aMajorMessage =
+      'getChordFromMode creates correct major scale for (Note("A"), ScaleType.major)';
+  const bMajorMessage =
+      'getChordFromMode creates correct major scale for (Note("B"), ScaleType.major)';
+  group('Scale', () {
+    test(cMajorMessage, () {
+      // Act
+      final cMajorScale = Scale.getChordFromMode(
+        Note('C'),
+        ScaleType.major,
       );
-    });
 
-    test('To flat ${note.name}', () {
-      final naturalName = note.name[0];
-      final auxNote = Note(naturalName);
-      final flat = auxNote - 1;
-      print(' flatten: ${flat.name}');
-      expect(
-        flat.isFlat(),
-        (naturalName == 'C' || naturalName == 'F') ? false : true,
+      // Assert
+      expect(cMajorScale.key.name, equals('C'));
+      expect(cMajorScale.type, equals(ScaleType.major));
+
+      // Check if all notes in the scale are correct
+      final noteNames = cMajorScale.notes.map((note) => note.name).toList();
+      expect(noteNames, equals(['C', 'D', 'E', 'F', 'G', 'A', 'B']));
+    });
+    test(dMajorMessage, () {
+      // Act
+      final dMajorScale = Scale.getChordFromMode(
+        Note('D'),
+        ScaleType.major,
       );
+
+      // Assert
+      expect(dMajorScale.key.name, equals('D'));
+      expect(dMajorScale.type, equals(ScaleType.major));
+
+      // Check if all notes in the scale are correct
+      final noteNames = dMajorScale.notes.map((note) => note.name).toList();
+      expect(noteNames, equals(['C#', 'D', 'E', 'F#', 'G', 'A', 'B']));
+    });
+    test(eMajorMessage, () {
+      // Act
+      final eMajorScale = Scale.getChordFromMode(
+        Note('E'),
+        ScaleType.major,
+      );
+
+      // Assert
+      expect(eMajorScale.key.name, equals('E'));
+      expect(eMajorScale.type, equals(ScaleType.major));
+
+      // Check if all notes in the scale are correct
+      final noteNames = eMajorScale.notes.map((note) => note.name).toList();
+      expect(noteNames, equals(['C#', 'D#', 'E', 'F#', 'G#', 'A', 'B']));
+    });
+    test(fMajorMessage, () {
+      // Act
+      final fMajorScale = Scale.getChordFromMode(
+        Note('F'),
+        ScaleType.major,
+      );
+
+      // Assert
+      expect(fMajorScale.key.name, equals('F'));
+      expect(fMajorScale.type, equals(ScaleType.major));
+
+      // Check if all notes in the scale are correct
+      final noteNames = fMajorScale.notes.map((note) => note.name).toList();
+      expect(noteNames, equals(['C', 'D', 'E', 'F', 'G', 'A', 'Bb']));
+    });
+    test(gMajorMessage, () {
+      // Act
+      final gMajorScale = Scale.getChordFromMode(
+        Note('G'),
+        ScaleType.major,
+      );
+
+      // Assert
+      expect(gMajorScale.key.name, equals('G'));
+      expect(gMajorScale.type, equals(ScaleType.major));
+
+      // Check if all notes in the scale are correct
+      final noteNames = gMajorScale.notes.map((note) => note.name).toList();
+      expect(noteNames, equals(['C', 'D', 'E', 'F#', 'G', 'A', 'B']));
+    });
+    test(aMajorMessage, () {
+      // Act
+      final aMajorScale = Scale.getChordFromMode(
+        Note('A'),
+        ScaleType.major,
+      );
+
+      // Assert
+      expect(aMajorScale.key.name, equals('A'));
+      expect(aMajorScale.type, equals(ScaleType.major));
+
+      // Check if all notes in the scale are correct
+      final noteNames = aMajorScale.notes.map((note) => note.name).toList();
+      expect(noteNames, equals(['C#', 'D', 'E', 'F#', 'G#', 'A', 'B']));
+    });
+    test(bMajorMessage, () {
+      // Act
+      final bMajorScale = Scale.getChordFromMode(
+        Note('B'),
+        ScaleType.major,
+      );
+
+      // Assert
+      expect(bMajorScale.key.name, equals('B'));
+      expect(bMajorScale.type, equals(ScaleType.major));
+
+      // Check if all notes in the scale are correct
+      final noteNames = bMajorScale.notes.map((note) => note.name).toList();
+      expect(noteNames, equals(['C#', 'D#', 'E', 'F#', 'G#', 'A#', 'B']));
     });
   });
 }
