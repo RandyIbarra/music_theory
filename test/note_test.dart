@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 
 void main() {
   group('Testing Note: ', () {
-    final note = Note('C');
+    final note = GuitarNote('C');
 
     setUp(() {
       // Additional setup goes here.
@@ -16,7 +16,7 @@ void main() {
 
     test('To sharp ${note.name}', () {
       final naturalName = note.name[0];
-      final auxNote = Note(naturalName);
+      final auxNote = GuitarNote(naturalName);
       final sharp = auxNote + 1;
       print(' sharp: ${sharp.name}');
       expect(
@@ -27,7 +27,7 @@ void main() {
 
     test('To flat ${note.name}', () {
       final naturalName = note.name[0];
-      final auxNote = Note(naturalName);
+      final auxNote = GuitarNote(naturalName);
       final flat = auxNote - 1;
       print(' flatten: ${flat.name}');
       expect(

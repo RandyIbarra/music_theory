@@ -20,7 +20,7 @@ void main() {
     test(cMajorMessage, () {
       // Act
       final cMajorScale = Scale.getChordFromMode(
-        Note('C'),
+        GuitarNote('C'),
         ScaleType.major,
       );
 
@@ -35,7 +35,7 @@ void main() {
     test(dMajorMessage, () {
       // Act
       final dMajorScale = Scale.getChordFromMode(
-        Note('D'),
+        GuitarNote('D'),
         ScaleType.major,
       );
 
@@ -50,7 +50,7 @@ void main() {
     test(eMajorMessage, () {
       // Act
       final eMajorScale = Scale.getChordFromMode(
-        Note('E'),
+        GuitarNote('E'),
         ScaleType.major,
       );
 
@@ -65,7 +65,7 @@ void main() {
     test(fMajorMessage, () {
       // Act
       final fMajorScale = Scale.getChordFromMode(
-        Note('F'),
+        GuitarNote('F'),
         ScaleType.major,
       );
 
@@ -80,7 +80,7 @@ void main() {
     test(gMajorMessage, () {
       // Act
       final gMajorScale = Scale.getChordFromMode(
-        Note('G'),
+        GuitarNote('G'),
         ScaleType.major,
       );
 
@@ -95,7 +95,7 @@ void main() {
     test(aMajorMessage, () {
       // Act
       final aMajorScale = Scale.getChordFromMode(
-        Note('A'),
+        GuitarNote('A'),
         ScaleType.major,
       );
 
@@ -110,7 +110,7 @@ void main() {
     test(bMajorMessage, () {
       // Act
       final bMajorScale = Scale.getChordFromMode(
-        Note('B'),
+        GuitarNote('B'),
         ScaleType.major,
       );
 

@@ -5,14 +5,14 @@ import 'package:music_theory/src/functions/semitone_formula_to_chord_type.dart';
 import '../note/note.dart';
 
 /// Dart implementation of a chord.
-/// A [Chord] consists of 3 [Note]'s (1st, 3rd, 5th) or 4 [Note]'s
-/// (1st, 3rd, 5th, 7th) with key [Note] as first.
+/// A [Chord] consists of 3 [GuitarNote]'s (1st, 3rd, 5th) or 4 [GuitarNote]'s
+/// (1st, 3rd, 5th, 7th) with key [GuitarNote] as first.
 class Chord {
   /// Key note of chord.
-  Note key;
+  GuitarNote key;
 
   /// Notes of chord.
-  List<Note> notes;
+  List<GuitarNote> notes;
 
   /// Type of chord.
   ChordType type;
@@ -24,7 +24,7 @@ class Chord {
   ///
 
   /// Chords constructor from key note and mode.
-  factory Chord.getChordFromMode(Note key, ChordType mode) {
+  factory Chord.getChordFromMode(GuitarNote key, ChordType mode) {
     /// Get the constructor from the registry.
     final constructor = chordRegistry[mode];
 
@@ -35,7 +35,7 @@ class Chord {
 
   /// Chord from semitones formula
   factory Chord.getChordFromSemitonesFormula({
-    required Note key,
+    required GuitarNote key,
     required List<int> semitoneList,
     ChordType? chordType,
   }) =>
@@ -53,11 +53,11 @@ class Chord {
   ///
 
   /// Major chord constructor from key note.
-  factory Chord.getMajor(Note key) =>
+  factory Chord.getMajor(GuitarNote key) =>
       Chord(key, [key, key + 4, key + 7], ChordType.major);
 
   /// Major 7 chord constructor from key note.
-  factory Chord.getMajor7(Note key) =>
+  factory Chord.getMajor7(GuitarNote key) =>
       Chord(key, [key, key + 4, key + 7, key + 11], ChordType.major7);
 
   ///
@@ -65,20 +65,20 @@ class Chord {
   ///
 
   /// Minor chord constructor from key note.
-  factory Chord.getMinor(Note key) =>
+  factory Chord.getMinor(GuitarNote key) =>
       Chord(key, [key, key + 3, key + 7], ChordType.minor);
 
   /// Minor 7 chord constructor from key note.
-  factory Chord.getMinor7(Note key) =>
+  factory Chord.getMinor7(GuitarNote key) =>
       Chord(key, [key, key + 3, key + 7, key + 11], ChordType.minor7);
 
   ///
   /// Useful functions
   ///
 
-  int hasNote(Note queryNote) {
+  int hasNote(GuitarNote queryNote) {
     for (int index = 0; index < 3; index++) {
-      Note note = notes[index];
+      GuitarNote note = notes[index];
       if (note.isEqualTo(queryNote)) {
         return index * 2 + 1;
       }

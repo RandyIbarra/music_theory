@@ -1,9 +1,8 @@
 import 'package:music_theory/music_theory.dart';
-import 'package:music_theory/src/enums/scale_type.dart';
 
 /// You can get the constructor by var _constructor = scaleRegistry['major'].
 /// And then, make your major scale by var _scale = _constructor(Note('C')).
-Map<ScaleType, Scale Function(Note)> scaleRegistry = {
+Map<ScaleType, Scale Function(GuitarNote)> scaleRegistry = {
   ScaleType.major: (note) => Scale.getMajor(note),
   ScaleType.dorian: (note) => Scale.getDorian(note),
   ScaleType.phrygian: (note) => Scale.getPhrygian(note),
@@ -14,7 +13,7 @@ Map<ScaleType, Scale Function(Note)> scaleRegistry = {
   ScaleType.chromatic: (note) => Scale.getChromatic(note),
 };
 
-Map<ScaleType, Scale Function(Note)> scaleRegistryFlat = {
+Map<ScaleType, Scale Function(GuitarNote)> scaleRegistryFlat = {
   ScaleType.major: (note) => Scale.getMajor(note, useFlat: true),
   ScaleType.dorian: (note) => Scale.getDorian(note, useFlat: true),
   ScaleType.phrygian: (note) => Scale.getPhrygian(note, useFlat: true),

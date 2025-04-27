@@ -1,34 +1,34 @@
 import 'note_names.dart';
 
 /// Dart implementation of a musical note.
-class Note {
+class GuitarNote {
   /// Note name
   String name;
 
   /// Position in the [allNotes]/[allNotesFlat] array.
   int position;
 
-  Note.internal(
+  GuitarNote.internal(
     this.name,
     this.position,
   );
 
-  factory Note.fromNoteName(NoteName noteName) {
+  factory GuitarNote.fromNoteName(NoteName noteName) {
     String name = getNoteFromNoteName(noteName);
     if (allNotes.contains(name)) {
-      return Note.internal(name, allNotes.indexOf(name));
+      return GuitarNote.internal(name, allNotes.indexOf(name));
     } else if (allNotesFlat.contains(name)) {
-      return Note.internal(name, allNotesFlat.indexOf(name));
+      return GuitarNote.internal(name, allNotesFlat.indexOf(name));
     } else {
       throw 'Error: Note does not exist';
     }
   }
 
-  factory Note(String name) {
+  factory GuitarNote(String name) {
     if (allNotes.contains(name)) {
-      return Note.internal(name, allNotes.indexOf(name));
+      return GuitarNote.internal(name, allNotes.indexOf(name));
     } else if (allNotesFlat.contains(name)) {
-      return Note.internal(name, allNotesFlat.indexOf(name));
+      return GuitarNote.internal(name, allNotesFlat.indexOf(name));
     } else {
       throw 'Error: Note does not exist';
     }
@@ -36,20 +36,20 @@ class Note {
 
   /// A Note type object supports the addition or subtraction of semitones
   /// resulting in another note.
-  Note operator +(int semitones) {
+  GuitarNote operator +(int semitones) {
     int newValue = (position + semitones + allNotes.length) % allNotes.length;
-    return Note.internal(allNotes[newValue], newValue);
+    return GuitarNote.internal(allNotes[newValue], newValue);
   }
 
   /// A Note type object supports the addition or subtraction of semitones
   /// resulting in another note.
-  Note operator -(int semitones) {
+  GuitarNote operator -(int semitones) {
     int newValue = (position - semitones + allNotes.length) % allNotes.length;
-    return Note.internal(allNotes[newValue], newValue);
+    return GuitarNote.internal(allNotes[newValue], newValue);
   }
 
   /// Compares current note with other. Missing to overload == operator.
-  bool isEqualTo(Note note) {
+  bool isEqualTo(GuitarNote note) {
     return name == note.name || position == note.position;
   }
 
