@@ -8,9 +8,9 @@ class Nota:
     def calcular_frecuencia(self):
         # Aquí pones la lógica de frecuencia basada en nombre y octava
         # Usando La4 = 440Hz como referencia
-        
-        pasos_desde_la4 = calcular_semitonos(self.nombre, self.octava)
-        return self.afinacion_base * (2 ** (pasos_desde_la4 / 12))
+        return None
+        # pasos_desde_la4 = calcular_semitonos(self.nombre, self.octava)
+        # return self.afinacion_base * (2 ** (pasos_desde_la4 / 12))
 
     def subir_semitonos(self, n):
         # lógica para cambiar nombre/octava n semitonos arriba
